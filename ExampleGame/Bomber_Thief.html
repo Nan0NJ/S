@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Bomber Thief</title>
+
+	<style type="text/css">
+		body{
+			background-color: black;
+		}
+			table{
+			border:2px solid black;
+			border-collapse: collapse;
+			margin: auto;
+		}
+		
+		td,tr{
+			border:1px solid black;
+			background-color: gray;
+			width: 5vw;
+			height:5vw;
+			border-collapse: collapse;
+			font-size:2vw;
+			text-align: center;
+			color:gold;
+		}
+		.target{
+			border-radius: 50%;
+			width: 4.6vw;
+			height:4.6vw;
+			background-color:red;
+		}
+
+		#player{
+
+			border-radius: 50%;
+			border:2px solid black;
+			width: 4vw;
+			height:4vw;
+			background-color: green;
+		}
+		.baseimg{
+			width: 4.6vw;
+			height:4.6vw;
+		}
+
+		.notification{
+			border: 3px solid black;
+			position: absolute;
+			left: 0; 
+  			right: 0; 
+  			margin:auto;
+  			margin-top:10vw;
+			z-index: 100;
+			width: 30vw;
+			height:15vw;
+			font-size: 5vw;
+			text-align: center;
+			background-color: green;
+			color:white;
+
+			display: none;
+		}
+
+
+	</style>
+
+	<script type="text/javascript">
+		
+		let nRow=7;
+		let nCol=10;
+		
+		let nCoins=9;
+		let coinsCollected=0;
+		
+		let playerRow=0;
+		let playerCol=0;
+		let board = undefined;
+
+
+		let nExplosions=15;
+		let explosionDelay=450;
+		let explosionLasts=300;
+		let explosionTimeBetween=600;
+		let totalExplosionTime=explosionDelay+explosionLasts+explosionTimeBetween;
+		let bombingInterval=undefined;
+		
+
+		function setBombs() {
+			console.log("Explosions");
+			for (let i=0;i<nExplosions;i++){
+				let cell=getRandomCell();
+				let cellRow=cell["row"];
+				let cellCol=cell["col"];
+				
+
+				document.getElementById(`cell_${cellRow}_${cellCol}`).style.backgroundColor="red";
+				
+				
+				window.setTimeout(function(){explodeBomb(cellRow,cellCol)},explosionDelay);
+			}
+				
+		}
+
+		function explodeBomb(cellRow,cellCol){
+
+			
+
+				//console.log("Boom: "+cellRow+", "+cellCol);
+			document.getElementById(`cell_${cellRow}_${cellCol}`).innerHTML="<img class='baseimg' src='boom.png'> ";
+			
+			if(cellRow==playerRow && cellCol==playerCol){
+
+				displayEnd("lost");
+			}else{
+				window.setTimeout(function(){revert_explodedBomb(cellRow,cellCol)},explosionLasts);
+			}
+
+		}
+			
+
+
+		
+
+		function revert_explodedBomb(cellRow,cellCol){
+
+		
+	
+				
+			document.getElementById(`cell_${cellRow}_${cellCol}`).innerHTML="";
+			document.getElementById(`cell_${cellRow}_${cellCol}`).style.backgroundColor="gray";
+
+			if(cellRow==playerRow && cellCol==playerCol){
+
+				displayEnd("lost");
+				
+			}
+			
+			
+		}
+
+
+		function getRandomCell(){
+			do{
+				randRow=Math.floor(Math.random() * nRow);
+				randCol=Math.floor(Math.random() * nCol);
+
+			}while(board[randRow][randCol]!="");
+			
+			return {"row":randRow,"col":randCol};
+		}
+
+
+		function generateBoard(){
+			board=Array(nRow);
+
+			for (let i=0;i<nRow;i++){
+				
+				board[i]=Array(nCol);
+				
+				for (let j = 0; j < nCol; j++) {
+					board[i][j] = "";
+					
+				}
+
+			}
+
+			board[0][0] = "P";
+			document.getElementById('cell_0_0').innerHTML="<img id=player src='thief.png'>";
+
+			for (let i=0;i<nCoins;i++){
+				
+				let cell=getRandomCell();
+				let cellRow=cell["row"];
+				let cellCol=cell["col"];
+
+				board[cellRow][cellCol] = "C";
+
+				document.getElementById(`cell_${cellRow}_${cellCol}`).innerHTML="<img class='baseimg' src='coin.png'> ";
+
+			}
+
+		}
+
+		function displayEnd(condId){
+			document.removeEventListener("keydown",movement);
+			clearInterval(bombingInterval);
+			document.getElementById(condId).style.display="block";
+		}
+
+
+		function movement(event){
+			//console.log(event.key);
+			if(event.key=="ArrowUp" && playerRow-1>=0 ){
+				playerRow=playerRow-1;
+			} else if(event.key=="ArrowDown" && playerRow+1<nRow ){
+				playerRow=playerRow+1;
+			} else if(event.key=="ArrowLeft" && playerCol-1>=0 ){
+				playerCol=playerCol-1;
+			}else if(event.key=="ArrowRight" && playerCol+1<nCol ){
+				playerCol=playerCol+1;
+			}
+
+			if (board[playerRow][playerCol] == "C"){
+
+				coinsCollected++;
+
+				board[playerRow][playerCol] = "";
+				document.getElementById(`cell_${playerRow}_${playerCol}`).innerHTML="";
+
+			}
+
+			document.getElementById(`cell_${playerRow}_${playerCol}`).appendChild(document.getElementById('player'));
+
+
+			//console.log("Moved: "+playerRow+", "+playerCol);
+
+
+			if(coinsCollected==nCoins){
+					displayEnd("victory");
+					
+				}
+
+
+		}
+
+		
+
+
+	</script>
+
+</head>
+
+<body>
+
+<div id="victory" class='notification'> You Win! </div>
+
+<div id="lost" class='notification' style="background-color: red;"> You Lost! </div>
+
+<script type="text/javascript">
+		document.write("<table>");
+		for (let i=0;i<nRow;i++){
+			document.write("<tr>");
+			for (let j = 0; j < nCol; j++) {
+				document.write(`<td id='cell_${i}_${j}'></td>`);
+			}
+			document.write("</tr>");
+		}
+
+		document.write("</table>");
+		generateBoard();
+
+		document.addEventListener("keydown",movement);
+		bombingInterval=setInterval(setBombs,totalExplosionTime);
+
+
+		
+</script>
+
+
+</body>
+
+
+
+	
+</html>
