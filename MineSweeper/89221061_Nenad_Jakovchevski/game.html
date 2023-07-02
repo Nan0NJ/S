@@ -1,0 +1,42 @@
+<!-- 
+  Student: Nenad Jakovchevski | Student_ID: 89221061
+  Project 1 ~ Game: MineSweeper
+  Page: Game Page 
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MineSweeper</title>
+    <!-- Using External CSS from file stylegame.css -->
+    <link rel="stylesheet" href="stylegame.css">
+</head>
+<body>  <!-- FUTURE IMPLEMENTATION WILL BE DONE WITH JAVA-SCRIPT -->
+    <!-- Implementation of a hud-bar -->
+    <nav>
+      <div class="infobar" id="infobar">TRY NOT TO STEP ON THE MINE!</div>
+      <div class="nav-items">
+        <a><BUTTON onclick="resetGame();">Reset Game</BUTTON></a>
+        <a href="main.html"><button>QUIT</button></a>
+      </div>
+  </nav>
+  <!-- Implementation of my fixed grid to display how it would look, LATER DEVELOPMENT WITH JAVA-SCRIPT -->
+  <table id="grid"></table>
+  <!-- Implementation of a table to display the correct values needed for later use in the game (TIMER / AMMOUNT OF FLAGS) -->
+  <table id="Information" border="2">
+      <tr>
+          <th><img src="timer.svg" alt="Timer"></th>
+          <th><span id="timer_count" value="timer_count">00:00</span></th>
+      </tr>
+      <tr>
+          <th><img src="bomb.svg" alt="flag"></th>
+          <th><span id="num_flags" value="flag_count">40</span></th>
+      </tr>
+  </table>
+  <!-- Implementing a footer on the site for a better display -->
+  <div id="footer"></div>
+  <!-- The JavaScript for the Game -->
+  <script src="gamesrc.js"></script>
+</body>
+</html>

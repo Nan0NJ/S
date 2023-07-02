@@ -1,0 +1,128 @@
+/* 
+  Student: Nenad Jakovchevski | Student_ID: 89221061
+  Project 1 ~ Game: MineSweeper
+  CSS: Game Page
+*/
+html {
+    min-height: 100%;
+    overflow: hidden;
+}
+/* Setting the body with a color and a fade in animation at the start of opening */
+body {
+    background-color: #fdcc04;
+    animation: fadeInAnimation ease 3s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+/* Creating fadeIn Animation */
+@keyframes fadeInAnimation {
+  0% {
+      opacity: 0;
+  }
+  100% {
+      opacity: 1;
+   }
+}
+/* Implementation for the hud-bar to be create a horizontal perfect display */
+ nav {
+    height: 4rem;
+    background: #fdcc04;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/* Implementation for the text field MOTO as nice player motivation */
+ .infobar {
+    color: #000;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-style: italic;
+    padding: 0 2rem;
+}
+/* implementation for the given links on the right of the bar */
+nav a {
+    text-decoration: none;
+    color: #000;
+
+    padding: 0 1.5rem;
+}
+/* implementation for the links when hovering */
+nav a:hover {
+    color: #fff;
+}
+/* Custom button to exit the game */
+button {
+    padding: 1rem 2rem;
+    font-size: 0.8rem;
+    border: none;
+    color: #fdcc04;
+    background: #000;
+    cursor: pointer;
+    border-radius: 50px;
+}
+/* Implementing button action when the button is hovered */
+button:hover {
+    background: #fff;
+    color: #000;
+}
+/* Opposite implementation as the button to create nice dynamic */
+button a:hover {
+    color: #000000;
+}
+/* Setting the table */
+ table {
+    border-collapse: collapse;
+    margin: 0 auto;
+    position: relative;
+    top: 5%;
+    box-shadow: 5px 10px;
+}
+/* Setting the cells for the grid */
+td {
+    width: 2em;
+    height: 2em;
+    border: 5px solid black;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    cursor: pointer;
+    background-color: #fdcc04;
+    background-image: linear-gradient(to top left, #fdcc04,  #d9d9d9);
+    color: grey;
+}
+/* Needed table game information for TIMER & FLAG */
+#Information {
+    margin-top: 5%;
+    width: 20%;
+}
+/* Setting image size */
+img {
+    width: 2em;
+    height: 2em;
+ }
+/* Setting the footer to be a gradient to give a better display  */
+#footer {
+    position: fixed; 
+        bottom: 0;
+        left: 0; 
+        width: 100%; 
+        height: 100px; 
+        background-image: linear-gradient(to bottom, #fdcc04, #000);
+}
+/*
+    Now we add the CSS implemented with the Java Script
+*/
+/* Setting the position of the game field being created */
+#grid {
+    margin-left: auto;
+    margin-right: auto;
+}
+/* Setting table cell when clicked */
+#grid TR TD.clicked {
+      background: #333333;
+}
+/* Setting the table cell for revealing the mines */
+#grid TR TD.mine {
+      background: #FF0000;
+      
+}

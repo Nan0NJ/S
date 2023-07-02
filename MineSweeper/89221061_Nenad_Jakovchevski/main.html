@@ -1,0 +1,70 @@
+<!-- 
+  Student: Nenad Jakovchevski | Student_ID: 89221061
+  Project 1 ~ Game: MineSweeper
+  Page: Main / Opening Page 
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MineSweeper</title>
+    <!-- Using External CSS from file stylemain.css -->
+    <link rel="stylesheet" href="stylemain.css">
+    <!-- Implementation of a more Game set font w/ Internal CSS -->
+    <link href='https://fonts.googleapis.com/css?family=Press Start 2P' rel='stylesheet'>
+    <style>
+    h1 {
+	    font-family: 'Press Start 2P';
+    }
+    </style>
+</head>
+<body>
+    <!-- Implementing a hud-bar for the game information and other feautures -->
+    <nav>
+        <div class="infobar">TRY NOT TO STEP ON THE MINE!</div>
+        <div class="nav-items">
+          <a href="main.html">Home</a> 
+          <a href="about.html">About Game</a>
+          <a href="#" onclick="closeWindow();">Exit Page</a>
+          <script>
+            function closeWindow() {
+                window.close();
+            }
+          </script>
+        </div>
+    </nav>
+    <!-- Implementing a section and divding it into both regions left / right for an image-image transition (right) and a game display (left) -->
+    <section class="hero">
+        <div class="hero-container">
+          <div class="column-left">
+            <h1>MineSweeper</h1>
+            <p>
+                "The Ultimate test of your click reflexes and logic skills!"<br>Try and Win!
+            </p>
+            <!-- Button for entering the game -->
+            <a href="game.html"><button>Play Game</button></a>
+            <!-- Creator Links for wanted needs (to boost my ego ;) ) -->
+            <table>
+            	<tr>
+            		<th>
+            			<a href="https://www.instagram.com/nenadjakovcevski/" target="_blank"><img class="icon" src="instagram_1.svg"></a>
+            		</th>
+                    <th></th>
+            		<th>
+            		<a href="https://github.com/Nan0NJ" target="_blank"><img class="icon" src="git.svg"></a>
+            		</th>
+            	</tr>
+            </table>
+          </div>
+          <!-- Implementing both images s.t. they will transition from one to another -->
+          <div class="column-right">
+            <img class="hero-image" id="image1" src="bomb.svg" alt="Image 1">
+            <img class="hero-image" id="image2" src="ass.svg" alt="Image 2">
+          </div>
+        </div>
+      </section>
+      <!-- Implementing a footer on the site for a better display -->
+      <div id="footer"></div>
+</body>
+</html>
