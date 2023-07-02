@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+.dropDiv {
+  width: 19.5em;
+  height: 3.5em;
+  padding: 0.5em;
+  border: 1px solid #aaaaaa;
+}
+
+.dragDiv{
+  width: 19em;
+  height: 3em;
+  background-color: red;
+  margin:3px;
+  position:relative;
+  display:block;
+}
+</style>
+<script>
+
+
+function dragStart(event){ // setting data with NAME & VALUE
+  console.log("Drag Started on id:"+this.id);
+  event.dataTransfer.setData("draggedElementID", event.target.id);
+  //...
+}
+
+
+function dragOver(event){ // moving element over another element
+  ElementConcerned=event.target; 
+  console.log("Drag Started on id:"+ElementConcerned.id);
+  event.preventDefault();
+  //...
+}
+
+function drop(event){
+  event.preventDefault();
+  console.log("Dropped over:"+event.target.id+" How do I know which element is being dropped?");
+  targetOfDrop = event.target;
+  // Hardcoded way -->  draggeDElement = document.getElementById("drag1");
+  draggedElementID = event.dataTransfer.getData("draggedElementID", event.target.id);
+  draggeDElement = document.getElementById(draggedElementID);
+  //Apending child
+  targetOfDrop.appendChild(draggeDElement)
+}
+
+
+
+</script>
+</head>
+<body>
+
+
+
+<div id="div1" class="dropDiv" ondrop=drop(event) ondragover=dragOver(event)></div>
+<br>
+
+<br>
+
+<div id="drag1" class="dragDiv" draggable="true" ondragstart=dragStart(event)  style="background-color: orange;" >Existing Div 2</div>
+
+<br>
+
+<div id="drag2" class="dragDiv" draggable="true" ondragstart=dragStart(event)  style="background-color: red;" >Existing Div 1</div>
+
+<br>
+
+
+</body>
+</html>
+
+
+
+

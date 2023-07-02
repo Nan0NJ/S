@@ -1,0 +1,103 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task01JavaS</title>
+    <script>
+        
+    </script>
+    <style>
+        .box{
+			position: relative;
+			width:9.5vw;
+			height:9.5vw;
+			border: 1px solid black;
+			float: left;
+			margin-bottom:1.5vw;
+		}
+
+
+
+		.circle{
+			width:9.3vw;
+			height:9.3vw;
+			background-color:red ;
+			border: 1px solid black;
+			border-radius: 50%;
+			margin:auto;
+		}
+
+		.buttons{
+			clear:both;
+		}
+
+		.buttons button{
+			margin:0.4vw;
+			font-size: 1.3em;	
+		}
+    </style>
+</head>
+<body>
+	
+	<script type="text/javascript">		
+        var element_id=1;
+        var remember_me=1;
+		for(var i=1; i<=3; i++){
+            for(var j=1; j<=10; j++){
+                if(i==1 && j==1){
+                    document.write(`<div class="box" id="${element_id}" onclick="clickMe(${element_id})"><div class="circle"></div></div>`);
+                    element_id++;
+                }
+                else{
+                document.write(`<div class="box" id="${element_id}" onclick="clickMe(${element_id})" style="float: left"></div>`)
+                element_id++;
+            }
+            }
+            document.write("<br>");
+        }
+        function changebymouse(element_id) {
+        document.getElementById(element_id.toString()).innerHTML=(`<div class="box" id="${element_id}" onclick="clickMe(${element_id})"><div class="circle"></div></div>`);   
+        }
+        function delete_element(id) {
+            document.getElementById(id.toString()).innerHTML="";
+        }
+        function clickMe(element_id) {
+            if(element_id!=remember_me){
+            changebymouse(element_id);
+            delete_element(remember_me);
+            remember_me=element_id;
+            }
+        }
+        function forward(){
+            if(remember_me%10!=0){
+                changebymouse(remember_me+1);
+                delete_element(remember_me);
+                remember_me+=1;
+            }
+        }
+        function backwards(element_id){
+            if(remember_me%10!=0){
+                changebymouse(remember_me-1);
+                delete_element(remember_me);
+                remember_me-=1;
+            }
+        }
+	</script>
+
+
+
+
+
+
+
+	<div class="buttons">
+		<button onclick="forward()">Forward</button>
+		<button onclick="backwards()">Backward</button>
+
+	</div>
+
+	<h1>You can also move the circle by clicking on a box!</h1>
+
+</body>
+</html>

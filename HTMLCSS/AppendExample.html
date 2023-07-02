@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+.dropDiv {
+  width: 19.5em;
+  min-height: 3.5em;
+  padding: 0.5em;
+  border: 1px solid #aaaaaa;
+}
+
+.dragDiv{
+  width: 19em;
+  height: 3em;
+  background-color: red;
+  margin:3px;
+}
+</style>
+<script>
+
+  let numAdded=0;
+
+  function appendExisting(){
+    document.getElementById("div1").appendChild(document.getElementById("drag1"));
+  }
+
+  function addNew(){
+    numAdded++;
+    newDiv=document.createElement("div");
+
+    newDiv.innerHTML="newDiv"+numAdded;
+    
+    newDiv.setAttribute("id","newDiv"+numAdded);
+    newDiv.setAttribute("class","dragDiv");
+    newDiv.setAttribute("onclick","makeOrange(this);");
+
+
+    
+    
+    document.getElementById("div1").appendChild(newDiv);
+
+    console.log(document.getElementById("newDiv"+numAdded).id);
+
+
+  }
+
+  function makeOrange(elementClicked){
+    elementClicked.style.backgroundColor="orange";
+  }
+
+
+
+</script>
+</head>
+<body>
+
+<p>Drag the W3Schools image into the rectangle:</p>
+
+
+<div id="div1" class="dropDiv" ></div>
+<br>
+
+
+<div id="drag1" class="dragDiv" style="background-color: blue;" onclick='this.style.backgroundColor="orange";'>Existing Div</div>
+
+<br>
+<button onclick="addNew();">Add New</button>
+<button onclick="appendExisting();">Append Existing</button>
+
+
+</body>
+</html>
+
+
+
+

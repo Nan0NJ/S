@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>Week9</title>
+
+	<style>
+
+
+		.box{
+			position: relative;
+			width:9.5vw;
+			height:9.5vw;
+			border: 1px solid black;
+			float: left;
+			margin-bottom:1.5vw;
+		}
+
+
+
+		.circle{
+			width:9.3vw;
+			height:9.3vw;
+			background-color:red ;
+			border: 1px solid black;
+			border-radius: 50%;
+			margin:auto;
+		}
+
+		.buttons{
+			clear:both;
+		}
+
+		.buttons button{
+			margin:0.4vw;
+			font-size: 1.3em;	
+		}
+
+
+	</style>
+
+
+	<script type="text/javascript">
+		
+		var circle_location=0;
+		
+		var n_elements=30;
+
+		function place_circle(new_location){
+
+			if(new_location<0 || new_location>=n_elements ){
+				return;
+			}
+
+			document.getElementById(circle_location.toString()).innerHTML= "";
+
+			document.getElementById(new_location.toString()).innerHTML="<div class='circle'></div>";
+
+			circle_location=new_location;
+			console.log("Moved circle to "+new_location);
+		}
+		
+
+		function forward(){
+				
+				place_circle(circle_location+1);
+
+			
+		}
+
+		function backward(){
+
+				place_circle(circle_location-1);
+		}
+
+
+
+		//TO DO: Replace the left right top bottom buttons with WASD key presses (WASD: w ="Up",a="Left",s="Down",d="Right").
+		//Hint: chatch the keypress event, get the key pressed with event.key and check for "w","a","s"."d"
+		// Key Press Event 
+		/*
+			The whole document records the event -> when we press a key the entire doc has an event (the parent)
+			We need to add an  event listener
+		*/
+		// document.addEventListener("keypress". funcnction(event){
+		// 	KeyPress = event.key;
+		// 	if(event.key == "d"){
+		// 		forward();
+		// 	}
+		// 	else if(event.key == "a"){
+		// 		backward();
+		// 	}
+		// 	else if(event.key == "w"){
+		// 		place_circle(circle_location+10);
+		// 	}
+		// 	else if(event.key =="s"){
+		// 		place_circle(circle_location-10);
+		// 	}
+		// }
+		// );
+	</script>
+
+</head>
+<body>
+	<div class='box' id='0' onclick="place_circle(0);">
+		<div class='circle'></div>
+	</div>
+
+	<script type="text/javascript">
+		
+		for(var i=1;i<n_elements;i++){
+			document.write(`<div class="box" id="${i}" onclick="place_circle(${i});"></div>`);
+		}
+
+
+
+
+	</script>
+
+
+
+
+
+
+
+	<div class="buttons">
+		<button onclick="forward();">Right (Forward)</button>
+		<button onclick="backward();">Left (Backward)</button>
+		<button onclick="place_circle(circle_location+10);">Down</button>
+		<button onclick="place_circle(circle_location-10);">Up</button>
+	</div>
+	<h1>You can also move the circle by clicking on a box!</h1>
+	<h1>(NOW) You can also move the circle with the WASD keys!</h1>
+	<h1>For Home! Try to redo this task using appendChild()</h1>
+</body>
+</html>

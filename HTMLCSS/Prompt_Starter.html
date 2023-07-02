@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Prompt Example</title>
+</head>
+<body>
+
+<script type="text/javascript">
+	
+	function addName() {
+		// Add a prompt which asks for name...
+		let text
+		let newName = window.prompt("Please enter your name:", "");
+ 		if (newName == null || newName == "") {
+    	text = "User cancelled the prompt.";
+  		} else {
+    	text = "Hello " + newName + "! How are you today?";
+  		}
+  		document.getElementById("demo").innerHTML = newName;
+		}
+		//If no name is entered inform the user that they have not entered a name
+		if (newName ==""){ 
+			window.alert("You did not enter a name. \n Try again!");
+			return;
+		}
+
+		//Add name to the list/name container
+		let container=document.getElementById("nameContainer");
+		container.innerHTML= "Edit the addName() function so that it adds a name new here using a prompt"; //Change this...
+	}
+
+</script>
+<h1>List of Names</h1>
+<button onclick="addName();">Add to list</button>
+<p id="nameContainer">
+	Names added so far: <br>
+</p>
+
+</body>
+</html>
